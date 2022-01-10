@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MyRaces
@@ -8,13 +9,16 @@ namespace MyRaces
         private GameController _gameController;
         private readonly Transform _placeForUi;
         private readonly ProfilePlayer _profilePlayer;
+        private readonly List<ItemConfig> _itemConfigs;
 
-        public MainController(Transform placeForUi, ProfilePlayer profilePlayer)
+        public MainController(Transform placeForUi, ProfilePlayer profilePlayer, List<ItemConfig> itemConfigs)
         {
             _placeForUi = placeForUi;
             _profilePlayer = profilePlayer;
             OnChangeGameState(_profilePlayer.CurrentState.value);
             profilePlayer.CurrentState.SubcribeOnChange(OnChangeGameState);
+
+            _itemConfigs = itemConfigs;
         }
 
         protected override void OnDispose()
@@ -33,10 +37,12 @@ namespace MyRaces
                     _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
                     _gameController?.Dispose();
                     break;
+                
                 case GameState.Game:
-                    _gameController = new GameController(_profilePlayer, _placeForUi);
+                    _gameController = new GameController(_profilePlayer, _placeForUi, _itemConfigs);
                     _mainMenuController?.Dispose();
                     break;
+                
                 default:
                     _mainMenuController?.Dispose();
                     _gameController?.Dispose();

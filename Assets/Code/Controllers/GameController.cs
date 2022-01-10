@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MyRaces
 {
     public class GameController : BaseController
     {
-        public GameController(ProfilePlayer profilePlayer, Transform placeUI)
+        public GameController(ProfilePlayer profilePlayer, Transform placeUI, List<ItemConfig> itemConfigs)
         {
             var leftMove = new SubscribeProperty<float>();
             var rightMove = new SubscribeProperty<float>();
@@ -17,6 +18,9 @@ namespace MyRaces
             
             var tapeController = new TapeBackgroundController(leftMove, rightMove);
             AddControler(tapeController);
+            
+            var inventoryController = new InventoryController(itemConfigs, placeUI);
+            AddControler(inventoryController);
         }
     }
 }
