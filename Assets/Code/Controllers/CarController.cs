@@ -26,9 +26,9 @@ namespace MyRaces
             return null;
         }
 
-        public GameObject GetViewObject()
+        public CarView GetViewObject()
         {
-            return _carView.gameObject;
+            return _carView;
         }
     }
 }

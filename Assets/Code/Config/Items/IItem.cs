@@ -8,5 +8,7 @@ namespace MyRaces
         ItemInfo Info { get; set; }
         
         public Sprite Sprite { get; set; }
+
+        public TypeUpgradeItems TypeUpgrade { get; set; }
     }
 }

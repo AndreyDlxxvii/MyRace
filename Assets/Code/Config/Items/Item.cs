@@ -7,5 +7,7 @@ namespace MyRaces
         public int Id { get; set; }
         public ItemInfo Info { get; set; }
         public Sprite Sprite { get; set; }
+        
+        public TypeUpgradeItems TypeUpgrade { get; set; }
     }
 }

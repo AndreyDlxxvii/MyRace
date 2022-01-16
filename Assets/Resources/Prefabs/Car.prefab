@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 1272222129517447714}
   - component: {fileID: 6916576790644031726}
   m_Layer: 0
-  m_Name: SpringSprite
+  m_Name: SpringSpriteBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 6621924817185997073}
   - component: {fileID: 4617406310415624067}
   m_Layer: 0
-  m_Name: SpringSprite (1)
+  m_Name: SpringSpriteForward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -511,12 +511,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43bfd7c85b7969c419d62a49c486e580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _windowTransform: {fileID: 6671321240057627579}
-  _weightTransform: {fileID: 3038077617037291235}
-  _springLeftTransform: {fileID: 1272222129517447714}
-  _springRightTransform: {fileID: 6621924817185997073}
-  _tireLeftTransform: {fileID: 2888579476072394851}
-  _tireRightTransform: {fileID: 1959354338043260515}
+  _windowSprite: {fileID: 3825489217764450566}
+  _weightSprite: {fileID: 8350009189402173373}
+  _springBackSprite: {fileID: 6916576790644031726}
+  _springForwardSprite: {fileID: 4617406310415624067}
+  _tireBackSprite: {fileID: 2799938565668799931}
+  _tireForwardSprite: {fileID: 1088290134615923334}
 --- !u!1 &8451805597918948043
 GameObject:
   m_ObjectHideFlags: 0

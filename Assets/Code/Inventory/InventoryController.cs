@@ -9,16 +9,17 @@ namespace MyRaces
         private readonly ResourcesPath _viewPath = new ResourcesPath{PathResources = "Prefabs/ItemMenu"};
         private readonly IInventoryModel _inventoryModel;
         private readonly IInventoryView _inventoryView;
-        private readonly IItemsRepository _repositoryInfo;
+        private readonly IRepository<int, IItem> _repositoryInfo;
         private readonly Transform _placeUI;
+        private readonly CarView _сarView;
 
-        public InventoryController(List<ItemConfig> itemConfigs, Transform placeUI)
+        public InventoryController(List<ItemConfig> itemConfigs, Transform placeUI, CarView car)
         {
             _placeUI = placeUI;
+            _сarView = car;
             _inventoryModel = new InventoryModel();
             _inventoryView = LoadView();
             _repositoryInfo = new ItemsRepository(itemConfigs);
-            
             _inventoryView.WeightBtn += ShowInventory;
             _inventoryView.WindowBtn += ShowInventory;
             _inventoryView.SuspensionButton += ShowInventory;
@@ -29,25 +30,36 @@ namespace MyRaces
         {
             var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath), _placeUI, false);
             AddGameObject(objectView);
-            if (objectView.TryGetComponent(out InventoryView inventoryView ))
+
+            if (objectView.TryGetComponent(out InventoryView inventoryView))
             {
-                return inventoryView;
+                inventoryView.CarView = _сarView;
+                return inventoryView; 
             }
-            else return null;
+                
+            return null;
         }
         public void ShowInventory(int Id)
         {
-            var q = _repositoryInfo.Items[Id];
+            var item = _repositoryInfo.Collection[Id];
             var equippedItem = _inventoryModel.GetEquippedItems();
-            if (!equippedItem.Contains(q))
+            if (!equippedItem.Contains(item))
             {
-                _inventoryModel.EquipItem(q);
+                _inventoryModel.EquipItem(item);
             }
             else
             {
-                _inventoryModel.UnEquipItem(q);
+                _inventoryModel.UnEquipItem(item);
             }
             _inventoryView.Display(equippedItem);
+        }
+
+        protected override void OnDispose()
+        {
+            _inventoryView.WeightBtn -= ShowInventory;
+            _inventoryView.WindowBtn -= ShowInventory;
+            _inventoryView.SuspensionButton -= ShowInventory;
+            _inventoryView.TireButton -= ShowInventory;
         }
     }
 }

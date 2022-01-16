@@ -10,14 +10,16 @@ namespace MyRaces
         private readonly Transform _placeForUi;
         private readonly ProfilePlayer _profilePlayer;
         private readonly List<ItemConfig> _itemConfigs;
+        private readonly List<AbilityItemConfig> _abilityItemConfigs;
 
-        public MainController(Transform placeForUi, ProfilePlayer profilePlayer, List<ItemConfig> itemConfigs)
+        public MainController(Transform placeForUi, ProfilePlayer profilePlayer, List<ItemConfig> itemConfigs,
+            List<AbilityItemConfig> abilityItemConfigs)
         {
             _placeForUi = placeForUi;
             _profilePlayer = profilePlayer;
             OnChangeGameState(_profilePlayer.CurrentState.value);
             profilePlayer.CurrentState.SubcribeOnChange(OnChangeGameState);
-
+            _abilityItemConfigs = abilityItemConfigs;
             _itemConfigs = itemConfigs;
         }
 
@@ -39,7 +41,7 @@ namespace MyRaces
                     break;
                 
                 case GameState.Game:
-                    _gameController = new GameController(_profilePlayer, _placeForUi, _itemConfigs);
+                    _gameController = new GameController(_profilePlayer, _placeForUi, _itemConfigs, _abilityItemConfigs);
                     _mainMenuController?.Dispose();
                     break;
                 
