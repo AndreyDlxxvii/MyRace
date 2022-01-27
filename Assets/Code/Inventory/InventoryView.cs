@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,11 @@ namespace MyRaces
         [SerializeField] private Button _suspensionButton;
         [SerializeField] private Button _tireButton;
 
+        private RectTransform _weightButtonRectTransform;
+        private RectTransform _windowButtonRectTransform;
+        private RectTransform _suspensionButtonRectTransform;
+        private RectTransform _tireButtonRectTransform;
+        private float _duration = 1f;
         public event Action <int> WeightBtn;
         public event Action <int> WindowBtn;
         public event Action <int> SuspensionButton;
@@ -20,13 +26,44 @@ namespace MyRaces
 
         public CarView CarView { get; set; }
 
+        private void Awake()
+        {
+            _weightButtonRectTransform = _weightButton.GetComponent<RectTransform>();
+            _windowButtonRectTransform = _windowButton.GetComponent<RectTransform>();
+            _suspensionButtonRectTransform = _suspensionButton.GetComponent<RectTransform>();
+            _tireButtonRectTransform = _tireButton.GetComponent<RectTransform>();
+        }
+
         private void Start()
         {
-            _weightButton.onClick.AddListener(() => WeightBtn(1));
-            _windowButton.onClick.AddListener(() => WindowBtn(2));
-            _suspensionButton.onClick.AddListener(() => SuspensionButton(3));
-            _tireButton.onClick.AddListener(() => TireButton(4));
+            _weightButton.onClick.AddListener(call: () => { 
+                WeightBtn(1);
+                ChangeScaleRectTransform(_weightButtonRectTransform);
+                });
+            _windowButton.onClick.AddListener(() =>
+            {
+                WindowBtn(2);
+                ChangeScaleRectTransform(_windowButtonRectTransform);
+            });
+            _suspensionButton.onClick.AddListener(() =>
+            {
+                SuspensionButton(3);
+                ChangeScaleRectTransform(_suspensionButtonRectTransform);
+            });
+            _tireButton.onClick.AddListener(() =>
+            {
+                TireButton(4);
+                ChangeScaleRectTransform(_tireButtonRectTransform);
+            });
         }
+
+        private void ChangeScaleRectTransform(RectTransform _buttonRectTransform)
+        {
+            _buttonRectTransform.DOScale(new Vector3(2f, 2f, 2f), _duration).onComplete += delegate
+            {
+                _buttonRectTransform.DOScale(new Vector3(1f, 1f, 1f), _duration); };
+        }
+        
 
         public void Display(IReadOnlyList<IItem> items)
         {
