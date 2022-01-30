@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
 namespace MyRaces
@@ -26,6 +28,12 @@ namespace MyRaces
         public SpriteRenderer TireBackSprite => _tireBackSprite;
 
         public SpriteRenderer TireForwardSprite => _tireForwardSprite;
+
+        private void Start()
+        {
+            _tireBackSprite.GetComponent<Transform>().DORotate(new Vector3(0, 0, -180), 1, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
+            _tireForwardSprite.GetComponent<Transform>().DORotate(new Vector3(0, 0, -180), 1, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
+        }
 
         public List<SpriteRenderer> AllSpriteRenderer
         {
