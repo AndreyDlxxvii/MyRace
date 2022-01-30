@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace MyRaces
 {
-    public class ItemsRepository : BaseController, IItemsRepository
+    public class ItemsRepository : BaseController, IRepository<int,IItem>
     {
-        public IReadOnlyDictionary<int, IItem> Items => _itemsMapById;
+        public IReadOnlyDictionary<int, IItem> Collection => _collectionMapById;
         
-        private Dictionary<int, IItem> _itemsMapById = new Dictionary<int, IItem>();
+        private Dictionary<int, IItem> _collectionMapById = new Dictionary<int, IItem>();
 
         public ItemsRepository(List<ItemConfig> itemConfigs)
         {
@@ -15,18 +15,18 @@ namespace MyRaces
 
         protected override void OnDispose()
         {
-            _itemsMapById.Clear();
+            _collectionMapById.Clear();
         }
 
         private void PopulateItems(List<ItemConfig> itemConfigs)
         {
             foreach (var ellConfig in itemConfigs)
             {
-                if (_itemsMapById.ContainsKey(ellConfig.ID))
+                if (_collectionMapById.ContainsKey(ellConfig.ID))
                 {
                     continue;
                 }
-                _itemsMapById.Add(ellConfig.ID, CreateItem(ellConfig));
+                _collectionMapById.Add(ellConfig.ID, CreateItem(ellConfig));
             }
         }
 
@@ -36,7 +36,8 @@ namespace MyRaces
             {
                 Id = ellConfig.ID, 
                 Info = new ItemInfo {Title = ellConfig.Title},
-                Sprite = ellConfig.Sprite
+                Sprite = ellConfig.Sprite,
+                TypeUpgrade = ellConfig.TypeUpgradeItems
             };
         }
     }

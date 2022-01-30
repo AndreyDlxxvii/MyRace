@@ -1,24 +1,40 @@
-using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class CarView : MonoBehaviour
+namespace MyRaces
 {
-    [SerializeField] private Transform _windowTransform;
-    [SerializeField] private Transform _weightTransform;
-    [SerializeField] private Transform _springLeftTransform;
-    [SerializeField] private Transform _springRightTransform;
-    [SerializeField] private Transform _tireLeftTransform;
-    [SerializeField] private Transform _tireRightTransform;
+    public class CarView : MonoBehaviour
+    {
+        [SerializeField] private SpriteRenderer _windowSprite;
+        [SerializeField] private SpriteRenderer _weightSprite;
+        [SerializeField] private SpriteRenderer _springBackSprite;
+        [SerializeField] private SpriteRenderer _springForwardSprite;
+        [SerializeField] private SpriteRenderer _tireBackSprite;
+        [SerializeField] private SpriteRenderer _tireForwardSprite;
+        
+        private List<SpriteRenderer> _allSpriteRenderer;
 
-    public Transform WindowTransform => _windowTransform;
+        public SpriteRenderer WindowSprite => _windowSprite;
 
-    public Transform WeightTransform => _weightTransform;
+        public SpriteRenderer WeightSprite => _weightSprite;
 
-    public Transform SpringLeftTransform => _springLeftTransform;
+        public SpriteRenderer SpringBackSprite => _springBackSprite;
 
-    public Transform SpringRightTransform => _springRightTransform;
+        public SpriteRenderer SpringForwardSprite => _springForwardSprite;
 
-    public Transform TireLeftTransform => _tireLeftTransform;
+        public SpriteRenderer TireBackSprite => _tireBackSprite;
 
-    public Transform TireRightTransform => _tireRightTransform;
+        public SpriteRenderer TireForwardSprite => _tireForwardSprite;
+
+        public List<SpriteRenderer> AllSpriteRenderer
+        {
+            get
+            {
+                _allSpriteRenderer = GetComponentsInChildren<SpriteRenderer>().ToList();
+                _allSpriteRenderer.RemoveAt(0);
+                return _allSpriteRenderer;
+            }
+        }
+    }
 }

@@ -8,6 +8,9 @@ namespace MyRaces
         [SerializeField] private int _id;
         [SerializeField] private string _title;
         [SerializeField] private Sprite _sprite;
+        [SerializeField] private TypeUpgradeItems _typeUpgradeItems;
+
+        public TypeUpgradeItems TypeUpgradeItems => _typeUpgradeItems;
 
         public int ID => _id;
 
