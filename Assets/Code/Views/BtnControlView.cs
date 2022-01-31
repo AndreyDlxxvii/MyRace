@@ -9,17 +9,13 @@ namespace MyRaces
         [SerializeField] private Button _leftButton;
         [SerializeField] private Button _rightButton;
         [SerializeField] private Button _exitButton;
-        //[SerializeField] private PointerEventData PointerEventData;
 
         public override void Init(SubscribeProperty <float> leftMove, SubscribeProperty<float> rightMove, float speed)
         {
             base.Init(leftMove, rightMove, speed);
             UpdateManager.SubscribeToUpdate(() => Move(speed));
         }
-        private void OnDestroy()
-        {
-            UpdateManager.UnsubscribeFromUpdate(() => Move(1));
-        }
+
         public void Move(float speed)
         {
             _leftButton.onClick.AddListener(() => OnLeftMove(speed));
@@ -29,6 +25,14 @@ namespace MyRaces
         private void Exit()
         {
             Application.Quit();
+        }
+        
+        private void OnDestroy()
+        {
+            _leftButton.onClick.RemoveAllListeners();
+            _rightButton.onClick.RemoveAllListeners();
+            _exitButton.onClick.RemoveAllListeners();
+            UpdateManager.UnsubscribeFromUpdate(() => Move(1));
         }
     }
 }

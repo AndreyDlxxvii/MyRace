@@ -10,7 +10,11 @@ namespace MyRaces
         [SerializeField] private UnityAdsTools _unityAdsTools;
         [SerializeField] private ItemConfig[] _itemConfigs;
         [SerializeField] private AbilityItemConfig[] _abilityItemConfigs;
-        //private MainController _mainController;
+
+        [SerializeField] private DailyRewardView _dailyRewardView;
+        [SerializeField] private CurrencyView _currencyView;
+        [SerializeField] private FightWindowView _fightWindowView;
+        [SerializeField] private StartFightWindowView _startFightWindowView;
         
         private CursorController _cursorController;
 
@@ -18,7 +22,8 @@ namespace MyRaces
         {
             var profilePlayer = new ProfilePlayer(15f, _unityAdsTools);
             profilePlayer.CurrentState.value = GameState.Start;
-            new MainController(_placeForUI, profilePlayer, _itemConfigs.ToList(), _abilityItemConfigs.ToList());
+            new MainController(_placeForUI, profilePlayer, _itemConfigs.ToList(), _abilityItemConfigs.ToList(), _dailyRewardView,
+                _currencyView, _fightWindowView, _startFightWindowView);
             
             
             _cursorController = new CursorController();

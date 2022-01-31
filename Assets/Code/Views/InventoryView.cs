@@ -9,6 +9,14 @@ namespace MyRaces
 {
     public class InventoryView : MonoBehaviour, IInventoryView, IDisposable
     {
+        //TODO отработать проблемы ниже
+        // 3) В InventoryView. WindowBtn(2);, SuspensionButton(3); -все это выглядит костыльно. 
+        // Со стороны не понятно, что обозначают цифры 1, 2, 3... Судя по тому, что в 
+        // Display по id меняются картинки на машинке, то лучше для каждого предмета сделать тип места прицепления к машинке 
+        // (какой-нибудьenum PlaceAttachmentType) => тогда в Display можно будет проверять по этому enum. 
+        // А также можно было бы заменить все эти делегаты:
+        
+        
         [SerializeField] private Button _weightButton;
         [SerializeField] private Button _windowButton;
         [SerializeField] private Button _suspensionButton;
@@ -37,31 +45,31 @@ namespace MyRaces
         private void Start()
         {
             _weightButton.onClick.AddListener(call: () => { 
-                WeightBtn(1);
+                WeightBtn?.Invoke(1);
                 ChangeScaleRectTransform(_weightButtonRectTransform);
                 });
             _windowButton.onClick.AddListener(() =>
             {
-                WindowBtn(2);
+                WindowBtn?.Invoke(2);
                 ChangeScaleRectTransform(_windowButtonRectTransform);
             });
             _suspensionButton.onClick.AddListener(() =>
             {
-                SuspensionButton(3);
+                SuspensionButton?.Invoke(3);
                 ChangeScaleRectTransform(_suspensionButtonRectTransform);
             });
             _tireButton.onClick.AddListener(() =>
             {
-                TireButton(4);
+                TireButton?.Invoke(4);
                 ChangeScaleRectTransform(_tireButtonRectTransform);
             });
         }
 
-        private void ChangeScaleRectTransform(RectTransform _buttonRectTransform)
+        private void ChangeScaleRectTransform(RectTransform buttonRectTransform)
         {
-            _buttonRectTransform.DOScale(new Vector3(2f, 2f, 2f), _duration).onComplete += delegate
+            buttonRectTransform.DOScale(new Vector3(2f, 2f, 2f), _duration).onComplete += delegate
             {
-                _buttonRectTransform.DOScale(new Vector3(1f, 1f, 1f), _duration); };
+                buttonRectTransform.DOScale(new Vector3(1f, 1f, 1f), _duration); };
         }
         
 
@@ -73,19 +81,19 @@ namespace MyRaces
             }
             foreach (var item in items)
             {
-                switch (item.Id)
+                switch (item.TypeUpgrade)
                 {
-                   case 1:
+                   case TypeUpgradeItems.Weight:
                        CarView.WeightSprite.sprite = item.Sprite;
                        break;
-                   case 2:
+                   case TypeUpgradeItems.Window:
                        CarView.WindowSprite.sprite = item.Sprite;
                        break;
-                   case 3:
+                   case TypeUpgradeItems.Suspension:
                        CarView.SpringBackSprite.sprite = item.Sprite;
                        CarView.SpringForwardSprite.sprite = item.Sprite;
                        break;
-                   case 4:
+                   case TypeUpgradeItems.Tire:
                        CarView.TireBackSprite.sprite = item.Sprite;
                        CarView.TireForwardSprite.sprite = item.Sprite;
                        break;
