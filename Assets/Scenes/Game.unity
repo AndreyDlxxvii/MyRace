@@ -430,6 +430,10 @@ MonoBehaviour:
   _abilityItemConfigs:
   - {fileID: 11400000, guid: 2adcfd7243f77d4409f5bbc8fdb35c82, type: 2}
   - {fileID: 11400000, guid: 5e4970156fc7f10488b9d6a1736f77d7, type: 2}
+  _dailyRewardView: {fileID: 3166435610675093434, guid: c91cc4d5f10921e43a6fabe3475d0037, type: 3}
+  _currencyView: {fileID: 186096824980922531, guid: 97065d1a846c07e4ebd9803c3caaffdb, type: 3}
+  _fightWindowView: {fileID: 6484093811050465791, guid: 55bbd8de97f8c7444b5be444f673d865, type: 3}
+  _startFightWindowView: {fileID: 7832717135357837993, guid: 4cf576af35cddb643b34c612ff3a8050, type: 3}
 --- !u!1 &2092068172
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,12 +16,12 @@ namespace MyRaces
             _speed = speed;
         }
 
-        protected virtual void OnLeftMove(float value)
+        protected void OnLeftMove(float value)
         {
             _leftMove.value = value;
         }
 
-        protected virtual void OnRightMove(float value)
+        protected void OnRightMove(float value)
         {
             _rightMove.value = value;
         }

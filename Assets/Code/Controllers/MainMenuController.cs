@@ -14,9 +14,8 @@ namespace MyRaces
             _placeUI = placeUI;
             _profilePlayer = profilePlayer;
             _mainMenuView = LoadView();
-            _mainMenuView.Init(StartGame);
+            _mainMenuView.Init(StartGame, RewadGame);
         }
-
 
         private MainMenuView LoadView()
         {
@@ -26,13 +25,17 @@ namespace MyRaces
            {
                return mainMenuView;
            }
-           else return null;
+           return null;
         }
         private void StartGame()
         {
             _profilePlayer.CurrentState.value = GameState.Game;
             _profilePlayer.AnalyticsTool.SendMessage(GameState.Game.ToString()); 
             _profilePlayer.AdsShower.ShowInterstitial();
+        }
+        private void RewadGame()
+        {
+            _profilePlayer.CurrentState.value = GameState.Reward;
         }
     }
 }
