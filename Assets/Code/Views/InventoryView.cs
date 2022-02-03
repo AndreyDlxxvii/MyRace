@@ -9,14 +9,6 @@ namespace MyRaces
 {
     public class InventoryView : MonoBehaviour, IInventoryView, IDisposable
     {
-        //TODO отработать проблемы ниже
-        // 3) В InventoryView. WindowBtn(2);, SuspensionButton(3); -все это выглядит костыльно. 
-        // Со стороны не понятно, что обозначают цифры 1, 2, 3... Судя по тому, что в 
-        // Display по id меняются картинки на машинке, то лучше для каждого предмета сделать тип места прицепления к машинке 
-        // (какой-нибудьenum PlaceAttachmentType) => тогда в Display можно будет проверять по этому enum. 
-        // А также можно было бы заменить все эти делегаты:
-        
-        
         [SerializeField] private Button _weightButton;
         [SerializeField] private Button _windowButton;
         [SerializeField] private Button _suspensionButton;

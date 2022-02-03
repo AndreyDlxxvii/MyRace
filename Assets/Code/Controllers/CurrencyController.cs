@@ -6,9 +6,9 @@ namespace MyRaces
     {
         public CurrencyController(Transform placeForUI, CurrencyView currencyView)
         {
-            var initCurencyView = Object.Instantiate(currencyView, placeForUI);
-            AddGameObject(initCurencyView.gameObject);
-            initCurencyView.RevreshView();
+            var initCurrencyView = Object.Instantiate(currencyView, placeForUI);
+            AddGameObject(initCurrencyView.gameObject);
+            initCurrencyView.RefreshView();
         }
     }
 }
