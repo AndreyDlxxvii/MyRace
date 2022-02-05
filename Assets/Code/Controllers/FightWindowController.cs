@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Events;
+using UnityEngine.Localization.Settings;
 using Object = UnityEngine.Object;
 
 namespace MyRaces
@@ -47,8 +49,18 @@ namespace MyRaces
             _fightWindowView.AddPowerButton.onClick.AddListener(() => ChangePower(true));
             _fightWindowView.MinusPowerButton.onClick.AddListener(() => ChangePower(false));
             
+            _fightWindowView.DropdownLanguage.onValueChanged.AddListener(delegate
+            {
+                ChangeLanguage( _fightWindowView.DropdownLanguage.value);
+            });
+            
             _fightWindowView.FightButton.onClick.AddListener(Fight);
             _fightWindowView.LeaveFightButton.onClick.AddListener(CloseWindow);
+        }
+
+        private void ChangeLanguage(int index)
+        {
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[index];
         }
 
         private void CloseWindow()
@@ -94,21 +106,21 @@ namespace MyRaces
             switch (dataType)
             {
                 case DataType.Money:
-                    _fightWindowView.CountMoneyText.text = $"Player money: {countChangeData}";
+                    _fightWindowView.CountMoneyText.text = $"{countChangeData}";
                     _money.CountMoney = countChangeData;
                     break;
                 case DataType.Health:
-                    _fightWindowView.CountHealthText.text = $"Player health: {countChangeData}";
+                    _fightWindowView.CountHealthText.text = $"{countChangeData}";
                     _health.CountHealth = countChangeData;
                     break;
                 case DataType.Power:
-                    _fightWindowView.CountPowerText.text = $"Player power: {countChangeData}";
+                    _fightWindowView.CountPowerText.text = $"{countChangeData}";
                     _power.CountPower = countChangeData;
                     break;
             }
 
             _enemyPower = _enemy.PowerEnemy;
-            _fightWindowView.CountPowerEnemyText.text = $"Enemy power: {_enemyPower}";
+            _fightWindowView.CountPowerEnemyText.text = $"{_enemyPower}";
         }
 
         protected override void OnDispose()
@@ -122,6 +134,7 @@ namespace MyRaces
             _fightWindowView.MinusPowerButton.onClick.RemoveAllListeners();
             _fightWindowView.FightButton.onClick.RemoveAllListeners();
             _fightWindowView.LeaveFightButton.onClick.RemoveAllListeners();
+            _fightWindowView.DropdownLanguage.onValueChanged.RemoveAllListeners();
             
             _money.Detach(_enemy);
             _power.Detach(_enemy);

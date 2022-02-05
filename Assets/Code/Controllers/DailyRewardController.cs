@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Claims;
+using Unity.Notifications.Android;
+//using Unity.Notifications.iOS;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -16,6 +18,9 @@ namespace MyRaces
         private readonly ProfilePlayer _profilePlayer;
         private readonly CurrencyView _currencyView;
         
+        private const string AndroidChannelId = "RewardNotification";
+        private const string IOSChannelId = "RewardNotification";
+        
         public DailyRewardController(Transform placeForUI, DailyRewardView dailyRewardView, ProfilePlayer profilePlayer, 
             CurrencyView currencyView)
         {
@@ -27,6 +32,10 @@ namespace MyRaces
             
             _currencyController = new CurrencyController(placeForUI, _currencyView);
             AddControler(_currencyController);
+#if UNITY_ANDROID
+            RegisterNotification();
+#endif
+            
         }
 
         public void RefreshView()
@@ -113,6 +122,8 @@ namespace MyRaces
             if (!_isGetReward)
                 return;
             var reward = _dailyRewardView.Rewards[_dailyRewardView.CurrentSlotInActive];
+            
+            ShowNotification();
 
             switch (reward.RewardType)
             {
@@ -129,12 +140,65 @@ namespace MyRaces
             RefreshRewardState();
         }
 
+        private void ShowNotification()
+        {
+            Notification();
+        }
+
         private void ResetTimer()
         {
             PlayerPrefs.DeleteAll();
             CurrencyView.Instance.RefreshView();
+            
+#if UNITY_ANDROID
+            AndroidNotificationCenter.DeleteNotificationChannel(AndroidChannelId);
+#elif UNITY_IOS
+            iOSNotificationCenter.RemoveDeliveredNotification(IOSChannelId);
+#endif
+
             //_currencyView.RefreshView();
         }
+        private void RegisterNotification()
+        {
+            var androidChanel = new AndroidNotificationChannel
+            {
+                Id = AndroidChannelId,
+                Name = "MyNotification",
+                Description = "Тестовое сообщение!",
+                CanBypassDnd = true,
+                EnableVibration = true,
+                EnableLights = true,
+                Importance = Importance.High,
+                CanShowBadge = true,
+                LockScreenVisibility = LockScreenVisibility.Public
+
+            };
+            AndroidNotificationCenter.RegisterNotificationChannel(androidChanel);
+        }
+        
+        private void Notification()
+        {
+#if UNITY_ANDROID
+            var androidNotification = new AndroidNotification
+            {
+                Color = Color.yellow,
+                RepeatInterval = TimeSpan.FromSeconds(_dailyRewardView.TimeCooldown),
+                Text = "Тестовое сообщение"
+            };
+            AndroidNotificationCenter.SendNotification(androidNotification, AndroidChannelId);
+#elif UNITY_IOS
+            var iosNotification = new iOSNotification
+            {
+                Identifier = "iosId",
+                Title = "Уведомление",
+                Body = "Тема уведомления",
+                ForegroundPresentationOption = PresentationOption.Sound | PresentationOption.Badge | PresentationOption.Alert
+            };
+            iOSNotificationCenter.ScheduleNotification(IOSChannelId);
+#endif
+            
+        }
+        
 
         protected override void OnDispose()
         {

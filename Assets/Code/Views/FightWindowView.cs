@@ -30,6 +30,8 @@ namespace MyRaces
         public Button FightButton => _fightButton;
         
         public Button LeaveFightButton => _leaveFightButton;
+        
+        public TMP_Dropdown DropdownLanguage => _dropdownLanguage;
 
         [SerializeField] private TMP_Text _countMoneyText;
         [SerializeField] private TMP_Text _countHealthText;
@@ -47,5 +49,7 @@ namespace MyRaces
 
         [SerializeField] private Button _fightButton;
         [SerializeField] private Button _leaveFightButton;
+
+        [SerializeField] private TMP_Dropdown _dropdownLanguage;
     }
 }

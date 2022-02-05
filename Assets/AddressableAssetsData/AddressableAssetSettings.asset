@@ -16,21 +16,40 @@ MonoBehaviour:
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
+  m_CatalogRequestsTimeout: 0
   m_DisableCatalogUpdateOnStart: 0
   m_IgnoreUnsupportedFilesInBuild: 0
   m_UniqueBundleIds: 0
+  m_NonRecursiveBuilding: 0
+  m_CCDEnabled: 0
   m_maxConcurrentWebRequests: 500
   m_ContiguousBundles: 0
+  m_StripUnityVersionFromBundleBuild: 0
+  m_DisableVisibleSubAssetRepresentations: 0
+  m_ShaderBundleNaming: 0
+  m_ShaderBundleCustomNaming: 
+  m_MonoScriptBundleNaming: 0
+  m_MonoScriptBundleCustomNaming: 
   m_RemoteCatalogBuildPath:
     m_Id: 5346a0d4cc37b344bbcff57c48d97a16
   m_RemoteCatalogLoadPath:
     m_Id: 12ff294921b81bb46ab02bd125458f72
+  m_ContentStateBuildPath: 
+  m_BuildAddressablesWithPlayerBuild: 2
   m_overridePlayerVersion: 
   m_GroupAssets:
   - {fileID: 11400000, guid: 95e411703758f514b95647aff1e9345d, type: 2}
   - {fileID: 11400000, guid: 2c32207d9fded3248876eaa6bdaeed7f, type: 2}
   - {fileID: 11400000, guid: 6e3662e25147ee24bb6f6b09b793b4ae, type: 2}
   - {fileID: 11400000, guid: 302a373ffec1e3b47a713ff16591ccfa, type: 2}
+  - {fileID: 11400000, guid: 7c2aa4a1ff763db488e1bd09ead782f0, type: 2}
+  - {fileID: 11400000, guid: 6a0228b4687e4494ea87e739ff5d7da3, type: 2}
+  - {fileID: 11400000, guid: c97fd7ccc34d09441857d2c147a20511, type: 2}
+  - {fileID: 11400000, guid: ca65f3f5a3acc4944a586bbfeeaa5242, type: 2}
+  - {fileID: 11400000, guid: 0df1e7dd732e07944ac6a9e436d39047, type: 2}
+  - {fileID: 11400000, guid: ef163ebc3b6b50e4c9ce83f11ba4d5ac, type: 2}
+  - {fileID: 11400000, guid: 781f6e4503c6497449e7732c5a4a78e1, type: 2}
+  - {fileID: 11400000, guid: 0892577f8d1816c4bb0581b1a44e875a, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -74,6 +93,10 @@ MonoBehaviour:
     - default
     - Car
     - ItemMenu
+    - Locale
+    - Locale-en-US
+    - Preload
+    - Locale-ru-RU
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: f75783fbe2e02dc459ccb94451bb6405, type: 2}
