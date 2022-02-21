@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace MyRaces
 {
@@ -10,9 +12,10 @@ namespace MyRaces
         {
             _profilePlayer = profilePlayer;
             _startFight = Object.Instantiate(startFightWindowView, placeForUI);
-            AddGameObject(_startFight.gameObject);
-            _startFight.StartFigth.onClick.AddListener(StartFight);
+             AddGameObject(_startFight.gameObject);
+             _startFight.StartFigth.onClick.AddListener(StartFight);
         }
+        
 
         private void StartFight()
         {

@@ -434,6 +434,10 @@ MonoBehaviour:
   _currencyView: {fileID: 186096824980922531, guid: 97065d1a846c07e4ebd9803c3caaffdb, type: 3}
   _fightWindowView: {fileID: 6484093811050465791, guid: 55bbd8de97f8c7444b5be444f673d865, type: 3}
   _startFightWindowView: {fileID: 7832717135357837993, guid: 4cf576af35cddb643b34c612ff3a8050, type: 3}
+  _itemPrefab:
+    m_AssetGUID: ade5251ee1ad86f45a39fd6d4dcb1f0c
+    m_SubObjectName: 
+    m_SubObjectType: 
 --- !u!1 &2092068172
 GameObject:
   m_ObjectHideFlags: 0

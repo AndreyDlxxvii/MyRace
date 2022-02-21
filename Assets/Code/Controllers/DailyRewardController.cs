@@ -132,7 +132,8 @@ namespace MyRaces
         private void ResetTimer()
         {
             PlayerPrefs.DeleteAll();
-            _currencyView.RevreshView();
+            CurrencyView.Instance.RefreshView();
+            //_currencyView.RefreshView();
         }
 
         protected override void OnDispose()

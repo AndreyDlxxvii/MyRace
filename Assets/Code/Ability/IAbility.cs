@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.ResourceManagement.AsyncOperations;
+
 namespace MyRaces
 {
     public interface IAbility

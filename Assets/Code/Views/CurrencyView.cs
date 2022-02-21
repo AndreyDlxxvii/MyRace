@@ -11,8 +11,8 @@ namespace MyRaces
         private const string DiamondKey = nameof(DiamondKey); 
         public static CurrencyView Instance { get; private set; }
 
-        [SerializeField] private TMP_Text _currenCountWood;
-        [SerializeField] private TMP_Text _currenCountDiamond;
+        [SerializeField] private TMP_Text _currentCountWood;
+        [SerializeField] private TMP_Text _currentCountDiamond;
         private void Awake()
         {
             Instance = this; 
@@ -21,20 +21,19 @@ namespace MyRaces
         public void AddWood(int value)
         {
             SaveNewCountIntPlayer(WoodKey, value);
-            RevreshView();
+            RefreshView();
         }
         
         public void AddDiamond(int value)
         {
             SaveNewCountIntPlayer(DiamondKey, value);
-            RevreshView();
+            RefreshView();
         }
 
-        public void RevreshView()
+        public void RefreshView()
         {
-            //не совсем понял почему не отрисовывается значение "0" хотя приходит "0" при сбросе
-            _currenCountWood.text = PlayerPrefs.GetInt(WoodKey, 0).ToString();
-            _currenCountDiamond.text = PlayerPrefs.GetInt(DiamondKey, 0).ToString();
+            _currentCountWood.text = PlayerPrefs.GetInt(WoodKey, 0).ToString();
+            _currentCountDiamond.text = PlayerPrefs.GetInt(DiamondKey, 0).ToString();
         }
 
         private void SaveNewCountIntPlayer(string key, int value)

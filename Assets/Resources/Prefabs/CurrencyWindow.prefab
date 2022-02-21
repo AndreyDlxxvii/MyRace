@@ -114,8 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caafc05250194925a81c1e777d50d03c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currenCountWood: {fileID: 8958901127595641539}
-  _currenCountDiamond: {fileID: 8958901127428417482}
+  _currentCountWood: {fileID: 8958901127595641539}
+  _currentCountDiamond: {fileID: 8958901127428417482}
 --- !u!1001 &186096825990869297
 PrefabInstance:
   m_ObjectHideFlags: 0

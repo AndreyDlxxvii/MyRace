@@ -31,10 +31,10 @@ namespace MyRaces
             _rectTransforShowHideButton = _showHideButton.GetComponent<RectTransform>();
             //_animator = GetComponent<Animator>();
             _showHideButton.onClick.AddListener(() => ShowHide());
+            
             _bombButton.onClick.AddListener(()=> OnUseRequested(AbilityType.Bomb));
             _shildButton.onClick.AddListener(() => OnUseRequested(AbilityType.Shild));
         }
-
         private void OnUseRequested(AbilityType type)
         
         {
